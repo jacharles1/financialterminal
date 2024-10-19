@@ -305,15 +305,23 @@ def stock_main():
         print()
 
         while True:
-            period = get_period_choice()
-            history = fetch_stock_history(ticker, period)
-            plot_stock(ticker, history, stock_data['name'], period)
-
-            user_input = input("Press 'r' to choose another timeline, any other key to continue, or 'q' to quit: ").lower()
-            if user_input == 'q':
+            choice = input("Enter 'g' to view graph, 'n' for new ticker, or 'q' to quit: ").lower()
+            if choice == 'q':
                 return
-            elif user_input != 'r':
+            elif choice == 'n':
                 break
+            elif choice == 'g':
+                period = get_period_choice()
+                history = fetch_stock_history(ticker, period)
+                plot_stock(ticker, history, stock_data['name'], period)
+
+                user_input = input("Press 'r' to choose another timeline, any other key to continue, or 'q' to quit: ").lower()
+                if user_input == 'q':
+                    return
+                elif user_input != 'r':
+                    break
+            else:
+                print("Invalid input. Please try again.")
 
         clear_screen()
 
